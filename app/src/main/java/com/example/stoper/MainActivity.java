@@ -1,5 +1,6 @@
 package com.example.stoper;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     }
     private void runTimer(){
         final TextView timeView = findViewById(R.id.time_view);
+        final Handler handler = new Handler();
+
+
 
         int hours = seconds/3600;
         int minutes = (seconds%36000)/60;
