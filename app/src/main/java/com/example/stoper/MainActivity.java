@@ -3,6 +3,7 @@ package com.example.stoper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private int seconds = 0;
@@ -25,6 +26,18 @@ public class MainActivity extends AppCompatActivity {
     public void onClickReset(View view) {
         running = false;
         seconds = 0;
+    }
+    private void runTimer(){
+        final TextView timeView = findViewById(R.id.time_view);
+
+        int hours = seconds/3600;
+        int minutes = (seconds%36000)/60;
+        int secs = seconds%60;
+        String time = String.format("%d:%02d:%02d", hours, minutes, secs);
+        timeView.setText(time);
+        if(running){
+            seconds++;
+        }
     }
 
 }
