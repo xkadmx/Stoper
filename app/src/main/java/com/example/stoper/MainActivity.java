@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    // amount of seconds displayed by stoper
     private int seconds = 0;
+    //checking if the stoper is working
     private boolean running;
     private boolean wasRunning;
 
@@ -25,6 +27,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        wasRunning = running;
+        running = false;
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if(wasRunning){
+            running = true;
+        }
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt("seconds", seconds);
@@ -36,17 +53,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        wasRunning = running; // is onStop() calling working or NAH
         running = false;
 
     }
 
     public void onClickStart(View view) {
         super.onStart();
-        if (wasRunning) {
-            running = true;
-        } // if stoper was  already running; let proceed
-    }
+        running = true;
+        }
+
 
     public void onClickStop(View view) {
         running = false;
